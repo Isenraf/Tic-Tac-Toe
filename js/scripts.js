@@ -233,7 +233,9 @@ const game = (function () {
     }
 
     // draw check
-    let isDraw = [...copy[0], ...copy[1], ...copy[2]].every((el) => el !== "");
+    const isDraw = [...copy[0], ...copy[1], ...copy[2]].every(
+      (el) => el !== ""
+    );
     if (isDraw) {
       isGameOver = true;
       return `Draw, no one wins`;
