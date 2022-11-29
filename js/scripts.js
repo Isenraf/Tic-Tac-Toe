@@ -34,6 +34,8 @@ const displayController = (function () {
   const nodeBoard = document.querySelector(".board");
   const nodeBtnPlayer = document.querySelector(".ply");
   const nodeBtnComputer = document.querySelector(".cpu");
+  const nodeModal = document.querySelector(".modal");
+  const nodeOverlay = document.querySelector(".overlay");
 
   function renderBoard() {
     const markup = gameBoard
@@ -51,16 +53,53 @@ const displayController = (function () {
     nodeBoard.innerHTML = markup;
   }
 
+  function renderMessage(message) {
+    let markup = "";
+
+    if (message === "x" || message === "o") {
+      markup = `
+      <p>${message} won!</p>
+      <h1 class="${message}"><span class="won">${message}</span> takes the round</h1>
+
+      <div>
+        <button type="button" class="new quit">quit</button>
+      </div>
+    `;
+    } else {
+      markup = `
+      <h1>${message}</h1>
+
+      <div>
+        <button type="button" class="new quit">quit</button>
+      </div>
+    `;
+    }
+
+    nodeModal.classList.remove("hidden");
+    nodeOverlay.classList.remove("hidden");
+    nodeModal.innerHTML = markup;
+  }
+
   function renderTurn(text) {
     nodeTurn.textContent = text;
   }
 
   function addClick() {
     const nodeListCells = document.querySelectorAll(".cell");
+    const nodeQuit = document.querySelector(".quit");
+
+    if (nodeQuit !== null) {
+      nodeQuit.addEventListener("click", function () {
+        nodeModal.classList.add("hidden");
+        nodeOverlay.classList.add("hidden");
+        handleReset();
+      });
+    }
 
     nodeReset.addEventListener("click", handleReset);
 
     nodeBtnPlayer.addEventListener("click", handleMode);
+
     nodeBtnComputer.addEventListener("click", handleComputerMode);
 
     containerMarks.forEach((mark) => {
@@ -118,7 +157,7 @@ const displayController = (function () {
     game.winner();
   }
 
-  return { addClick };
+  return { addClick, renderMessage, renderTurn };
 })();
 
 const game = (function () {
@@ -177,6 +216,7 @@ const game = (function () {
   function restartGame() {
     turn = 0;
     isGameOver = false;
+    displayController.renderTurn(playerOne.getMark());
     gameBoard.setBoard([
       ["", "", ""],
       ["", "", ""],
@@ -207,7 +247,9 @@ const game = (function () {
     for (let i = 0; i < copy.length; i++) {
       if (rowCheck(copy[i])) {
         isGameOver = true;
-        return copy[i][0];
+        displayController.renderMessage(copy[i][0]);
+        displayController.addClick();
+        return;
       }
     }
 
@@ -215,7 +257,9 @@ const game = (function () {
     for (let i = 0; i < copy.length; i++) {
       if (rowCheck(reArangeArr(copy)[i])) {
         isGameOver = true;
-        return copy[i][0];
+        displayController.renderMessage(copy[i][0]);
+        displayController.addClick();
+        return;
       }
     }
 
@@ -229,7 +273,9 @@ const game = (function () {
         copy[0][2] === copy[2][0])
     ) {
       isGameOver = true;
-      return copy[1][1];
+      displayController.renderMessage(copy[1][1]);
+      displayController.addClick();
+      return;
     }
 
     // draw check
@@ -238,7 +284,9 @@ const game = (function () {
     );
     if (isDraw) {
       isGameOver = true;
-      return `Draw, no one wins`;
+      displayController.renderMessage("Draw, no one wins");
+      displayController.addClick();
+      return;
     }
   }
 

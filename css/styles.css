@@ -15,6 +15,7 @@
 body {
   background-color: var(--cl-backg);
   font-family: "Permanent Marker", cursive;
+  position: relative;
 }
 
 main {
@@ -183,12 +184,54 @@ main {
   box-shadow: inset 0px -2px rgba(0, 0, 0, 0.5);
 }
 
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  text-transform: uppercase;
+  background-color: var(--cl-cell-backg);
+  color: var(--cl-btn);
+  position: absolute;
+  width: 100%;
+  top: 25%;
+  z-index: 2;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.won {
+  font-size: 64px;
+}
+
 .cpu {
   background-color: var(--cl-o);
 }
 
 .ply {
   background-color: var(--cl-x);
+}
+
+.quit {
+  background-color: var(--cl-btn);
 }
 
 .note {
