@@ -1,0 +1,208 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cl-x: #31c4be;
+  --cl-o: #f2b237;
+  --cl-btn: #a8bec9;
+  --cl-backg: #192a32;
+  --cl-cell-backg: #1f3540;
+}
+
+body {
+  background-color: var(--cl-backg);
+  font-family: "Permanent Marker", cursive;
+}
+
+main {
+  max-width: 960px;
+  margin: 60px auto;
+}
+
+.board-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.board,
+.board-head,
+.board-foot {
+  width: 320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 96px);
+  gap: 16px;
+}
+
+.board {
+  grid-template-rows: repeat(3, 96px);
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 72px;
+  font-weight: 900;
+  border-radius: 10px;
+  cursor: cell;
+}
+
+.cell,
+.middle {
+  background-color: var(--cl-cell-backg);
+  box-shadow: inset 0px -4px rgba(0, 0, 0, 0.5);
+}
+
+.left {
+  font-size: 24px;
+}
+
+.middle {
+  color: var(--cl-btn);
+  text-align: center;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.right button {
+  padding: 8px;
+  border: none;
+  background: none;
+  background-color: var(--cl-btn);
+  box-shadow: inset 0px -4px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.right button:active {
+  padding: 7px;
+  box-shadow: inset 0px -2px rgba(0, 0, 0, 0.5);
+}
+
+.board-foot div:nth-child(1) {
+  background-color: var(--cl-x);
+}
+
+.board-foot div:nth-child(2) {
+  background-color: var(--cl-btn);
+}
+
+.board-foot div:nth-child(3) {
+  background-color: var(--cl-o);
+}
+
+.track {
+  color: rgba(0, 0, 0, 0.8);
+  padding: 8px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+.score {
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.select-container {
+  width: 320px;
+  margin: 0 auto;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.select-head {
+  font-size: 24px;
+  text-align: center;
+}
+
+.select-body {
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--cl-cell-backg);
+  border-radius: 10px;
+  color: var(--cl-btn);
+  box-shadow: inset 0px -4px rgba(0, 0, 0, 0.5);
+}
+
+.marks {
+  width: 100%;
+  padding: 8px;
+  background-color: var(--cl-backg);
+  display: flex;
+  border-radius: 5px;
+}
+
+.marks div {
+  width: 100%;
+  font-size: 32px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.select {
+  background-color: var(--cl-btn);
+  color: var(--cl-backg);
+}
+
+.new {
+  font-size: 100%;
+  font-family: inherit;
+  border: none;
+  background: none;
+  color: rgba(0, 0, 0, 0.5);
+  padding: 8px;
+  box-shadow: inset 0px -4px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.new:active {
+  box-shadow: inset 0px -2px rgba(0, 0, 0, 0.5);
+}
+
+.cpu {
+  background-color: var(--cl-o);
+}
+
+.ply {
+  background-color: var(--cl-x);
+}
+
+.note {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.x {
+  color: var(--cl-x);
+}
+
+.o {
+  color: var(--cl-o);
+}
+
+.hidden {
+  display: none;
+}
